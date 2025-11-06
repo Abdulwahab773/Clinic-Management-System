@@ -16,9 +16,6 @@ const scheduleSchema = new mongoose.Schema({
 }, { _id: false }); 
 
 
-
-
-
 const doctorSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -41,7 +38,7 @@ const doctorSchema = new mongoose.Schema({
     required: true,
   },
   dob: {
-    type: Date,
+    type: String,
     required: true,
   },
   isAvailable: {

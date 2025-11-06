@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
-import PatientModel from "../../models/PatientModel.js";
 import jwt from "jsonwebtoken";
+import UserModel from "../../models/UserModel.js";
 
 export const signupController = async (req, res) => {
     try {
@@ -13,9 +13,9 @@ export const signupController = async (req, res) => {
             })
         }
 
-        const patient = await PatientModel.findOne({ email });
+        const existPatient = await UserModel.findOne({ email });
 
-        if (patient) {
+        if (existPatient) {
             return res.json({
                 message: "Email address already exists!",
                 status: false
@@ -29,11 +29,12 @@ export const signupController = async (req, res) => {
             password: hashPassword
         }
 
-        await PatientModel.create(patientObj);
+        const patient = await UserModel.create(patientObj);
 
         return res.json({
             message: "Patient Signup Successfully!",
             status: true,
+            patient 
         })
 
 
@@ -58,7 +59,7 @@ export const loginController = async (req, res) => {
             })
         }
 
-        const patient = await PatientModel.findOne({ email });
+        const patient = await UserModel.findOne({ email });
 
         if (!patient) {
             return res.json({

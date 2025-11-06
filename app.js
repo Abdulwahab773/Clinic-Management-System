@@ -4,6 +4,7 @@ import connectDatabase from "./config/db.js";
 import dotenv from "dotenv";
 import {v4 as uuid} from "uuid";
 import authRoute from "./routes/patient/authRoutes.js";
+import adminRoutes from "./routes/admin/adminRoutes.js";
 
 dotenv.config();
 
@@ -19,7 +20,7 @@ app.use(cors());
 connectDatabase();
 
 app.use("/api", authRoute)
-
+app.use("/api", adminRoutes)
 
 
 
